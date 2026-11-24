@@ -1,0 +1,5 @@
+Median indoor error was 2 mm.
+Can the rig measure indoor error?
+The log contains indoor sensor readings.
+The protocol compares readings with a fixed reference.
+The finding applies to the indoor rig.

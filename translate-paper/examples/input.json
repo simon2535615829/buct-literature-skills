@@ -1,0 +1,55 @@
+{
+  "case_id": "example-translation",
+  "glossary": {
+    "drift": {
+      "target": "漂移",
+      "basis": "原文使用漂移描述随时间变化的读数"
+    }
+  },
+  "source_blocks": [
+    {
+      "id": "p1",
+      "locator": "Example, Results ¶1",
+      "text": "The drift did not exceed 2 mm [3].",
+      "terms": [
+        "drift"
+      ],
+      "protect": [
+        "[3]"
+      ]
+    },
+    {
+      "id": "t1",
+      "locator": "Table 1, column 2",
+      "text": "Maximum drift (mm)",
+      "protect": [],
+      "terms": [
+        "drift"
+      ]
+    },
+    {
+      "id": "f1",
+      "locator": "Figure 2 caption",
+      "text": "Offset x = 2 mm [3].",
+      "protect": [
+        "x = 2 mm",
+        "[3]"
+      ],
+      "terms": []
+    }
+  ],
+  "translations": [
+    {
+      "id": "p1",
+      "text": "漂移未超过 2 mm [3]。"
+    },
+    {
+      "id": "t1",
+      "text": "最大漂移（mm）"
+    },
+    {
+      "id": "f1",
+      "text": "偏移量 x = 2 mm [3]。"
+    }
+  ]
+}

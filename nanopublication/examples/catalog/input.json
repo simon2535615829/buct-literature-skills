@@ -1,0 +1,476 @@
+{
+  "case_id": "teaching-catalog",
+  "creator": "示例整理者",
+  "documents": {
+    "D": {
+      "title": "Synthetic bench observations",
+      "version": "teaching-1",
+      "authors": null,
+      "year": null
+    }
+  },
+  "evidence": [
+    {
+      "id": "X1",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "At 10 °C, Quartz had less drift than Slate.",
+      "locator": "Synthetic example, line 1",
+      "document": "D"
+    },
+    {
+      "id": "X2",
+      "file": "source.txt",
+      "lines": [
+        2,
+        2
+      ],
+      "quote": "At 15 °C, Slate had less drift than Quartz.",
+      "locator": "Synthetic example, line 2",
+      "document": "D"
+    },
+    {
+      "id": "X3",
+      "file": "source.txt",
+      "lines": [
+        3,
+        3
+      ],
+      "quote": "At 20 °C, Copper had less drift than Zinc.",
+      "locator": "Synthetic example, line 3",
+      "document": "D"
+    },
+    {
+      "id": "X4",
+      "file": "source.txt",
+      "lines": [
+        4,
+        4
+      ],
+      "quote": "At 25 °C, Zinc had less drift than Copper.",
+      "locator": "Synthetic example, line 4",
+      "document": "D"
+    },
+    {
+      "id": "X5",
+      "file": "source.txt",
+      "lines": [
+        5,
+        5
+      ],
+      "quote": "At 10 °C, Quartz had less noise than Slate.",
+      "locator": "Synthetic example, line 5",
+      "document": "D"
+    },
+    {
+      "id": "X6",
+      "file": "source.txt",
+      "lines": [
+        6,
+        6
+      ],
+      "quote": "At 15 °C, Slate had less noise than Quartz.",
+      "locator": "Synthetic example, line 6",
+      "document": "D"
+    },
+    {
+      "id": "X7",
+      "file": "source.txt",
+      "lines": [
+        7,
+        7
+      ],
+      "quote": "At 20 °C, Copper had less noise than Zinc.",
+      "locator": "Synthetic example, line 7",
+      "document": "D"
+    },
+    {
+      "id": "X8",
+      "file": "source.txt",
+      "lines": [
+        8,
+        8
+      ],
+      "quote": "At 25 °C, Zinc had less noise than Copper.",
+      "locator": "Synthetic example, line 8",
+      "document": "D"
+    },
+    {
+      "id": "X9",
+      "file": "source.txt",
+      "lines": [
+        9,
+        9
+      ],
+      "quote": "At 10 °C, Quartz had less bias than Slate.",
+      "locator": "Synthetic example, line 9",
+      "document": "D"
+    },
+    {
+      "id": "X10",
+      "file": "source.txt",
+      "lines": [
+        10,
+        10
+      ],
+      "quote": "At 15 °C, Slate had less bias than Quartz.",
+      "locator": "Synthetic example, line 10",
+      "document": "D"
+    },
+    {
+      "id": "X11",
+      "file": "source.txt",
+      "lines": [
+        11,
+        11
+      ],
+      "quote": "At 20 °C, Copper had less bias than Zinc.",
+      "locator": "Synthetic example, line 11",
+      "document": "D"
+    },
+    {
+      "id": "X12",
+      "file": "source.txt",
+      "lines": [
+        12,
+        12
+      ],
+      "quote": "At 25 °C, Zinc had less bias than Copper.",
+      "locator": "Synthetic example, line 12",
+      "document": "D"
+    },
+    {
+      "id": "X13",
+      "file": "source.txt",
+      "lines": [
+        13,
+        13
+      ],
+      "quote": "At 10 °C, Quartz had less delay than Slate.",
+      "locator": "Synthetic example, line 13",
+      "document": "D"
+    },
+    {
+      "id": "X14",
+      "file": "source.txt",
+      "lines": [
+        14,
+        14
+      ],
+      "quote": "At 15 °C, Slate had less delay than Quartz.",
+      "locator": "Synthetic example, line 14",
+      "document": "D"
+    },
+    {
+      "id": "X15",
+      "file": "source.txt",
+      "lines": [
+        15,
+        15
+      ],
+      "quote": "At 20 °C, Copper had less delay than Zinc.",
+      "locator": "Synthetic example, line 15",
+      "document": "D"
+    },
+    {
+      "id": "X16",
+      "file": "source.txt",
+      "lines": [
+        16,
+        16
+      ],
+      "quote": "At 25 °C, Zinc had less delay than Copper.",
+      "locator": "Synthetic example, line 16",
+      "document": "D"
+    },
+    {
+      "id": "X17",
+      "file": "source.txt",
+      "lines": [
+        17,
+        17
+      ],
+      "quote": "At 10 °C, Quartz had less scatter than Slate.",
+      "locator": "Synthetic example, line 17",
+      "document": "D"
+    },
+    {
+      "id": "X18",
+      "file": "source.txt",
+      "lines": [
+        18,
+        18
+      ],
+      "quote": "At 15 °C, Slate had less scatter than Quartz.",
+      "locator": "Synthetic example, line 18",
+      "document": "D"
+    },
+    {
+      "id": "X19",
+      "file": "source.txt",
+      "lines": [
+        19,
+        19
+      ],
+      "quote": "At 20 °C, Copper had less scatter than Zinc.",
+      "locator": "Synthetic example, line 19",
+      "document": "D"
+    },
+    {
+      "id": "X20",
+      "file": "source.txt",
+      "lines": [
+        20,
+        20
+      ],
+      "quote": "At 25 °C, Zinc had less scatter than Copper.",
+      "locator": "Synthetic example, line 20",
+      "document": "D"
+    }
+  ],
+  "claims": [
+    {
+      "subject": "Quartz",
+      "relation": "had less drift than",
+      "object": "Slate",
+      "condition": "10 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic motion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X1"
+      ]
+    },
+    {
+      "subject": "Slate",
+      "relation": "had less drift than",
+      "object": "Quartz",
+      "condition": "15 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic motion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X2"
+      ]
+    },
+    {
+      "subject": "Copper",
+      "relation": "had less drift than",
+      "object": "Zinc",
+      "condition": "20 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic motion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X3"
+      ]
+    },
+    {
+      "subject": "Zinc",
+      "relation": "had less drift than",
+      "object": "Copper",
+      "condition": "25 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic motion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X4"
+      ]
+    },
+    {
+      "subject": "Quartz",
+      "relation": "had less noise than",
+      "object": "Slate",
+      "condition": "10 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic readout observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X5"
+      ]
+    },
+    {
+      "subject": "Slate",
+      "relation": "had less noise than",
+      "object": "Quartz",
+      "condition": "15 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic readout observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X6"
+      ]
+    },
+    {
+      "subject": "Copper",
+      "relation": "had less noise than",
+      "object": "Zinc",
+      "condition": "20 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic readout observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X7"
+      ]
+    },
+    {
+      "subject": "Zinc",
+      "relation": "had less noise than",
+      "object": "Copper",
+      "condition": "25 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic readout observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X8"
+      ]
+    },
+    {
+      "subject": "Quartz",
+      "relation": "had less bias than",
+      "object": "Slate",
+      "condition": "10 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic offset observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X9"
+      ]
+    },
+    {
+      "subject": "Slate",
+      "relation": "had less bias than",
+      "object": "Quartz",
+      "condition": "15 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic offset observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X10"
+      ]
+    },
+    {
+      "subject": "Copper",
+      "relation": "had less bias than",
+      "object": "Zinc",
+      "condition": "20 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic offset observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X11"
+      ]
+    },
+    {
+      "subject": "Zinc",
+      "relation": "had less bias than",
+      "object": "Copper",
+      "condition": "25 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic offset observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X12"
+      ]
+    },
+    {
+      "subject": "Quartz",
+      "relation": "had less delay than",
+      "object": "Slate",
+      "condition": "10 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic timing observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X13"
+      ]
+    },
+    {
+      "subject": "Slate",
+      "relation": "had less delay than",
+      "object": "Quartz",
+      "condition": "15 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic timing observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X14"
+      ]
+    },
+    {
+      "subject": "Copper",
+      "relation": "had less delay than",
+      "object": "Zinc",
+      "condition": "20 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic timing observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X15"
+      ]
+    },
+    {
+      "subject": "Zinc",
+      "relation": "had less delay than",
+      "object": "Copper",
+      "condition": "25 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic timing observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X16"
+      ]
+    },
+    {
+      "subject": "Quartz",
+      "relation": "had less scatter than",
+      "object": "Slate",
+      "condition": "10 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic dispersion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X17"
+      ]
+    },
+    {
+      "subject": "Slate",
+      "relation": "had less scatter than",
+      "object": "Quartz",
+      "condition": "15 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic dispersion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X18"
+      ]
+    },
+    {
+      "subject": "Copper",
+      "relation": "had less scatter than",
+      "object": "Zinc",
+      "condition": "20 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic dispersion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X19"
+      ]
+    },
+    {
+      "subject": "Zinc",
+      "relation": "had less scatter than",
+      "object": "Copper",
+      "condition": "25 °C",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "The synthetic dispersion observation identifies the two devices, their order and the test temperature.",
+      "evidence": [
+        "X20"
+      ]
+    }
+  ]
+}

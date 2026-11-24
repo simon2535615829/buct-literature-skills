@@ -1,0 +1,2 @@
+Method A used sensor S.
+Sensor S measured drift.

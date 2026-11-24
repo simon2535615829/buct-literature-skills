@@ -1,0 +1,132 @@
+{
+  "case_id": "sample-note",
+  "sections": [
+    "Introduction",
+    "Methods",
+    "Results",
+    "Discussion"
+  ],
+  "required_fields": [
+    "结果",
+    "限制",
+    "研究问题",
+    "数据",
+    "方法",
+    "结论"
+  ],
+  "summary": [
+    {
+      "text": "室内测得误差中位数为 2 mm。",
+      "notes": [
+        "N1"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "Median indoor error was 2 mm.",
+      "locator": "Example, Results ¶1"
+    },
+    {
+      "id": "X2",
+      "file": "source.txt",
+      "lines": [
+        2,
+        2
+      ],
+      "quote": "Can the rig measure indoor error?",
+      "locator": "Synthetic example, line 2"
+    },
+    {
+      "id": "X3",
+      "file": "source.txt",
+      "lines": [
+        3,
+        3
+      ],
+      "quote": "The log contains indoor sensor readings.",
+      "locator": "Synthetic example, line 3"
+    },
+    {
+      "id": "X4",
+      "file": "source.txt",
+      "lines": [
+        4,
+        4
+      ],
+      "quote": "The protocol compares readings with a fixed reference.",
+      "locator": "Synthetic example, line 4"
+    },
+    {
+      "id": "X5",
+      "file": "source.txt",
+      "lines": [
+        5,
+        5
+      ],
+      "quote": "The finding applies to the indoor rig.",
+      "locator": "Synthetic example, line 5"
+    }
+  ],
+  "notes": [
+    {
+      "id": "N1",
+      "section": "Results",
+      "field": "结果",
+      "text": "室内误差中位数为 2 mm。",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "N2",
+      "section": "Results",
+      "field": "限制",
+      "text": "本段未提供室外测量。",
+      "state": "unreported",
+      "searched": "给定 Results ¶1 全段"
+    },
+    {
+      "id": "X2",
+      "section": "Introduction",
+      "field": "研究问题",
+      "text": "Can the rig measure indoor error?",
+      "evidence": [
+        "X2"
+      ]
+    },
+    {
+      "id": "X3",
+      "section": "Methods",
+      "field": "数据",
+      "text": "The log contains indoor sensor readings.",
+      "evidence": [
+        "X3"
+      ]
+    },
+    {
+      "id": "X4",
+      "section": "Methods",
+      "field": "方法",
+      "text": "The protocol compares readings with a fixed reference.",
+      "evidence": [
+        "X4"
+      ]
+    },
+    {
+      "id": "X5",
+      "section": "Discussion",
+      "field": "结论",
+      "text": "The finding applies to the indoor rig.",
+      "evidence": [
+        "X5"
+      ]
+    }
+  ]
+}

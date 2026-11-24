@@ -1,0 +1,39 @@
+{
+  "case_id": "nano-example",
+  "creator": "示例整理者",
+  "documents": {
+    "D": {
+      "title": "Example calibration note",
+      "authors": null,
+      "year": null,
+      "version": "example-v1"
+    }
+  },
+  "evidence": [
+    {
+      "id": "E",
+      "document": "D",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "At 20 °C, A drifted less than B.",
+      "locator": "Example Results ¶1"
+    }
+  ],
+  "claims": [
+    {
+      "subject": "A",
+      "relation": "had less drift than",
+      "object": "B",
+      "condition": "20 °C, reported comparison",
+      "polarity": "positive",
+      "modality": "reported observation",
+      "confidence_basis": "直接报告了比较方向；未给出差值。",
+      "evidence": [
+        "E"
+      ]
+    }
+  ]
+}

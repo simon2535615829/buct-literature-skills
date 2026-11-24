@@ -1,0 +1,100 @@
+{
+  "case_id": "graph-example",
+  "evidence": [
+    {
+      "id": "E1",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "Method A used sensor S.",
+      "locator": "Example §2 ¶1"
+    },
+    {
+      "id": "E2",
+      "file": "source.txt",
+      "lines": [
+        2,
+        2
+      ],
+      "quote": "Sensor S measured drift.",
+      "locator": "Example §2 ¶2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "a",
+      "name": "Method A",
+      "type": "method",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "s",
+      "name": "sensor S",
+      "type": "instrument",
+      "evidence": [
+        "E1",
+        "E2"
+      ]
+    },
+    {
+      "id": "d",
+      "name": "drift",
+      "type": "quantity",
+      "evidence": [
+        "E2"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "a",
+      "target": "s",
+      "predicate": "uses",
+      "condition": "reported experiment",
+      "polarity": "positive",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "e2",
+      "source": "s",
+      "target": "d",
+      "predicate": "measures",
+      "condition": "reported experiment",
+      "polarity": "positive",
+      "evidence": [
+        "E2"
+      ]
+    }
+  ],
+  "alignment_notes": [
+    "两句中的 S 指向同一台仪器。"
+  ],
+  "queries": [
+    {
+      "mode": "out",
+      "start": "a",
+      "predicate": "uses",
+      "question": "Which instrument did Method A use?"
+    },
+    {
+      "mode": "in",
+      "start": "d",
+      "predicate": "measures",
+      "question": "Which instrument measured drift?"
+    },
+    {
+      "mode": "two_hop",
+      "start": "a",
+      "predicate": "uses",
+      "second_predicate": "measures",
+      "question": "Which quantity is reached through the instrument used by Method A?"
+    }
+  ]
+}
