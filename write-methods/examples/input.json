@@ -1,0 +1,121 @@
+{
+  "case_id": "example-method",
+  "evidence": [
+    {
+      "id": "E1",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "config: interval=5 ms",
+      "locator": "config fixture, interval"
+    },
+    {
+      "id": "E2",
+      "file": "source.txt",
+      "lines": [
+        2,
+        2
+      ],
+      "quote": "run R1 override: interval=8 ms",
+      "locator": "run R1 log line 2"
+    },
+    {
+      "id": "X3",
+      "file": "source.txt",
+      "lines": [
+        3,
+        3
+      ],
+      "quote": "run R2 observed: interval=12 ms",
+      "locator": "Synthetic example, line 3"
+    }
+  ],
+  "parameters": [
+    {
+      "id": "interval",
+      "run": "R1",
+      "stage": "recording",
+      "name": "采样间隔",
+      "observations": [
+        {
+          "value": 5,
+          "unit": "ms",
+          "kind": "configured",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "value": 8,
+          "unit": "ms",
+          "kind": "observed",
+          "evidence": [
+            "E2"
+          ]
+        }
+      ],
+      "resolution": {
+        "chosen": 8,
+        "unit": "ms",
+        "reason": "R1 日志显式记录覆盖值。",
+        "evidence": [
+          "E2"
+        ]
+      }
+    },
+    {
+      "id": "interval_R2",
+      "name": "采样间隔",
+      "run": "R2",
+      "stage": "recording",
+      "observations": [
+        {
+          "value": 12,
+          "unit": "ms",
+          "kind": "observed",
+          "evidence": [
+            "X3"
+          ]
+        }
+      ],
+      "resolution": {
+        "chosen": 12,
+        "unit": "ms",
+        "reason": "R2 的实测日志。",
+        "evidence": [
+          "X3"
+        ]
+      },
+      "aliases": [
+        "interval"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "heading": "采样设置",
+      "prose": [
+        {
+          "text": "R1 的实际采样间隔为 {{param:interval}}。",
+          "evidence": [
+            "E2"
+          ]
+        },
+        {
+          "text": "R2 的实际采样间隔为 {{param:interval_R2}}。",
+          "evidence": [
+            "X3"
+          ]
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "field": "重复次数",
+      "reason": "所给配置和两个运行的日志均未报告重复次数。"
+    }
+  ]
+}

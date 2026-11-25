@@ -1,0 +1,93 @@
+{
+  "case_id": "example-intro",
+  "documents": {
+    "A": {
+      "role": "prior",
+      "title": "Indoor benchmark (illustrative)",
+      "year": 2024,
+      "authors": "Fixture A"
+    },
+    "B": {
+      "role": "own",
+      "title": "Outdoor protocol (illustrative)",
+      "year": 2025,
+      "authors": "Fixture B"
+    }
+  },
+  "comparison": [
+    {
+      "work": "A",
+      "condition": "indoor only",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "document": "A",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "Testing was restricted to indoor runs.",
+      "locator": "Fixture A §3"
+    },
+    {
+      "id": "E2",
+      "document": "B",
+      "file": "source.txt",
+      "lines": [
+        2,
+        2
+      ],
+      "quote": "We tested the protocol outdoors.",
+      "locator": "Fixture B §2"
+    }
+  ],
+  "claims": [
+    {
+      "id": "B1",
+      "section": "background",
+      "paragraph": "1",
+      "text": "The protocol was evaluated in an indoor setting.",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "R1",
+      "section": "related",
+      "paragraph": "1",
+      "text": "The earlier benchmark restricted its trials to indoor runs.",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "G1",
+      "section": "gap",
+      "paragraph": "1",
+      "text": "The indoor benchmark leaves performance outdoors unresolved.",
+      "scope": "仅 A 的报告",
+      "scope_documents": [
+        "A"
+      ],
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "C1",
+      "section": "contribution",
+      "paragraph": "1",
+      "text": "The present study tested the protocol outdoors.",
+      "gap_id": "G1",
+      "evidence": [
+        "E2"
+      ]
+    }
+  ]
+}

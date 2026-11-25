@@ -1,0 +1,94 @@
+{
+  "case_id": "teaching-planned",
+  "documents": {
+    "A": {
+      "role": "prior",
+      "title": "Bench evaluation",
+      "authors": "Group E",
+      "year": 2023
+    },
+    "B": {
+      "role": "own",
+      "title": "Field evaluation plan",
+      "authors": "Group F",
+      "year": 2026
+    }
+  },
+  "comparison": [
+    {
+      "work": "A",
+      "condition": "steady illumination only",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "document": "A",
+      "file": "source.txt",
+      "lines": [
+        1,
+        1
+      ],
+      "quote": "Bench tests used steady illumination only.",
+      "locator": "Group E §1"
+    },
+    {
+      "id": "E2",
+      "document": "B",
+      "file": "source.txt",
+      "lines": [
+        2,
+        2
+      ],
+      "quote": "We plan to evaluate flickering illumination. No test under flickering illumination has yet been completed.",
+      "locator": "Group F §1"
+    }
+  ],
+  "claims": [
+    {
+      "id": "B1",
+      "section": "background",
+      "paragraph": "1",
+      "text": "The evaluation of illumination conditions is a key task in this study.",
+      "evidence": [
+        "E1",
+        "E2"
+      ]
+    },
+    {
+      "id": "R1",
+      "section": "related",
+      "paragraph": "1",
+      "text": "Group E conducted bench tests using steady illumination only.",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "G1",
+      "section": "gap",
+      "paragraph": "1",
+      "text": "The prior study by Group E leaves the performance under flickering illumination unresolved.",
+      "scope": "prior study scope",
+      "scope_documents": [
+        "A"
+      ],
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "id": "C1",
+      "section": "contribution",
+      "paragraph": "1",
+      "text": "The present study plans to evaluate flickering illumination, but no test under flickering illumination has yet been completed.",
+      "gap_id": "G1",
+      "evidence": [
+        "E2"
+      ]
+    }
+  ]
+}

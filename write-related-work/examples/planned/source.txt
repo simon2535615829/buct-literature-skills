@@ -1,0 +1,2 @@
+Bench tests used steady illumination only.
+We plan to evaluate flickering illumination. No test under flickering illumination has yet been completed.

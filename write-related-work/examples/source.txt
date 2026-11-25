@@ -1,0 +1,2 @@
+Testing was restricted to indoor runs.
+We tested the protocol outdoors.
