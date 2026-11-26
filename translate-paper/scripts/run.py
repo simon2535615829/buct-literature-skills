@@ -57,7 +57,7 @@ def translate(ctx):
             item = d["glossary"][term]
             if not source_present(term, item):
                 ctx.issue(key, f"Review glossary source form for {term} in this block")
-            elif not occurs(item["target"], new):
+            elif not any(occurs(form, new) for form in [item["target"], *item.get("target_forms", [])]):
                 ctx.issue(key, f"Review glossary entry {term}: expected {item['target']}")
         aligned.append(dict(b, translation=new))
         text.extend([f"### {key} · {b['locator']}", original, new or "[待译]"])

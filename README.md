@@ -5,7 +5,7 @@
 - [阅读01｜文献文档解析](parse-paper-columns/SKILL.md)
 - [阅读03｜文献翻译](translate-paper/SKILL.md)
 - [阅读10｜文献总结与结构化笔记](paper-notes/SKILL.md)
-- [阅读14｜Nanopublication](nanopublication/SKILL.md)
+- [阅读14｜Nanopublication](nanopublication-compact/SKILL.md)
 - [阅读15｜文献知识图谱构建](paper-knowledge-graph/SKILL.md)
 - [写作08｜引言与相关工作写作](write-related-work/SKILL.md)
 - [写作09｜方法与实验章节写作](write-methods/SKILL.md)
