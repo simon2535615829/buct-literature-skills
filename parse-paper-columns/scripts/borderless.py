@@ -39,8 +39,10 @@ def infer(page,rows,ruled):
             continue
         edges=[(left[-1]["x1"]+right[0]["x0"])/2 for left,right in zip(groups,groups[1:])]
         matrix=[groups]
-        for row in rows[i+1:]:
-            prev=rows[i+len(matrix)-1]
+        end=i+1
+        for index in range(i+1,len(rows)):
+            row=rows[index]
+            prev=rows[index-1]
             if row[0]["top"]-prev[0]["top"]>3.3*height:
                 break
             cells=[[] for _ in groups]
@@ -53,6 +55,18 @@ def infer(page,rows,ruled):
                 texts=[" ".join(w["text"] for w in cell) for cell in cells]
                 if sum(bool(s) for s in texts)>=2 and any(VALUE.fullmatch(s) for s in texts[1:]):
                     matrix.append(cells)
+                    end=index+1
+                    continue
+                # Join a close, label-only continuation between two populated rows.
+                # Require geometric support on both sides to avoid absorbing notes below the table.
+                if (len(matrix)>1 and texts[0] and not any(texts[1:]) and index+1<len(rows)
+                        and matrix[-1][0] and abs(row[0]["x0"]-matrix[-1][0][0]["x0"]) < height
+                        and row[0]["top"]-prev[0]["top"] <= 1.6*height
+                        and rows[index+1][0]["top"]-row[0]["top"] > row[0]["top"]-prev[0]["top"]
+                        and rows[index+1][0]["top"]-row[0]["top"] <= 3.3*height
+                        and any(w["x0"]>edges[0] and VALUE.fullmatch(w["text"]) for w in rows[index+1])):
+                    matrix[-1][0].extend(cells[0])
+                    end=index+1
                     continue
             break
         if len(matrix)<3:
@@ -70,5 +84,5 @@ def infer(page,rows,ruled):
                                   text=" ".join(w["text"] for w in cell)))
         tables.append(dict(id=f"p{page.page_number}-u{len(tables)+1}",bbox=box,method="aligned_text",
                            rows=len(matrix),columns=len(groups),cells=cells,caption=title if caption else None))
-        skip=i+len(matrix)
+        skip=end
     return tables

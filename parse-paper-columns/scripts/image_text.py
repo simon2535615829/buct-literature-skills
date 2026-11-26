@@ -86,6 +86,33 @@ def read_images(page, native, engine, lang):
             px=(math.floor((box[0]-ox)*sx), math.floor((box[1]-oy)*sy),
                 math.ceil((box[2]-ox)*sx), math.ceil((box[3]-oy)*sy))
             crop = rendered.crop(px)
+            # A small inset can contain many more source pixels than the page preview.
+            # Render only its rectangle at source density; keep the same PDF coordinates.
+            width, height = box[2]-box[0], box[3]-box[1]
+            iw, ih = obj.get("srcsize") or (0, 0)
+            scale = min(iw/width, ih/height, math.sqrt(8_000_000/(width*height)))
+            origin_x, origin_y = ox + px[0]/sx, oy + px[1]/sy
+            if scale > 1.25*max(sx,sy) and not page.rotation:
+                try:
+                    import pypdfium2 as pdfium
+                    with pdfium.PdfDocument(page.pdf.stream) as document:
+                        pdfpage = document[page.page_number-1]
+                        try:
+                            pw, ph = pdfpage.get_size()
+                            if abs(pw-page.width)<1 and abs(ph-page.height)<1:
+                                margins = (box[0]-ox, ph-(box[3]-oy), pw-(box[2]-ox), box[1]-oy)
+                                bitmap = pdfpage.render(scale=scale, crop=tuple(max(0,v) for v in margins))
+                                try:
+                                    crop = bitmap.to_pil().copy()
+                                finally:
+                                    bitmap.close()
+                                sx, sy = crop.width/width, crop.height/height
+                                origin_x, origin_y = box[:2]
+                        finally:
+                            pdfpage.close()
+                except (ImportError, OSError, ValueError, RuntimeError):
+                    # The existing page crop stays usable when higher-resolution rendering is unavailable.
+                    pass
             engines = [engine]
             if engine=="auto":
                 engines = ["tesseract"] if shutil.which("tesseract") else []
@@ -112,8 +139,8 @@ def read_images(page, native, engine, lang):
                 continue
             kept, low = 0, False
             for text, (x,y,r,b), conf in tokens:
-                x,r=ox+(px[0]+x)/sx,ox+(px[0]+r)/sx
-                y,b=oy+(px[1]+y)/sy,oy+(px[1]+b)/sy
+                x,r=origin_x+x/sx,origin_x+r/sx
+                y,b=origin_y+y/sy,origin_y+b/sy
                 overlap=[w for w in native+added if x-2 <= (w["x0"]+w["x1"])/2 <= r+2 and y-2 <= (w["top"]+w["bottom"])/2 <= b+2]
                 normalize=lambda s: re.sub(r"\s+","",s).casefold()
                 if normalize("".join(w["text"] for w in sorted(overlap,key=lambda w:w["x0"]))) == normalize(text):
