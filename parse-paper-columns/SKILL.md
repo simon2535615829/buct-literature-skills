@@ -11,7 +11,7 @@ description: Parse native-text scientific PDFs into page-anchored lines, repair 
 python /skills/weekly-skill/scripts/extract.py /input/paper.pdf /app/work/original-layout.json
 ```
 
-有 pdfplumber 时，结果按原页编号保存文字、栏序、图像区域、表格单元格及坐标。页上有可选文本时仍须读图像区域。小扫描框按原始像素密度局部渲染，OCR 字词带来源框；需要特定语言时按已安装语言包选择 `--ocr-lang`。缺少 pdfplumber 时，脚本会尝试 pdftotext，保留原生文字和词框。遇到 `partial_native_text`、`needs_visual_read` 或页级错误，按案例需要用环境提供的渲染或 OCR 工具核对该页。无法辨认的内容注明页码、位置和缺口。
+提取器优先保留原生文字和词框，仅在嵌图中识别原生词框以外的可见内容。默认使用已安装的 Tesseract，缺少它时尝试 RapidOCR。扫描词带来源框和置信度，可用 `--ocr-lang` 指定已安装的 Tesseract 语言包。局部识别失败时，原生文字与已完成区域仍保留。对答案相关的 `needs_visual_read` 区域核对原页，读不清时注明页码、位置和缺口。缺少 pdfplumber 时会尝试 pdftotext，保留原生文字和词框。
 
 提取表值时把列标题、行名（可能换行）、数值或空单元格一起核对。无框表依靠同列的反复对齐；列归属含混时查看原页对应位置。保留标题、脚注、图表题注和正文的阅读次序。读取长文档可用 `--first-page` 与 `--last-page` 分段。
 

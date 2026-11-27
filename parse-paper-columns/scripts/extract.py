@@ -124,7 +124,12 @@ def ruled_tables(page, words):
 
 def parse_page(page, engine, lang):
     native = page.extract_words(x_tolerance=2, y_tolerance=2)
-    regions, recognized = read_images(page, native, engine, lang)
+    try:
+        regions, recognized = read_images(page, native, engine, lang)
+    except Exception as exc:
+        regions = [dict(id=f"p{page.page_number}-images", bbox=list(page.bbox),
+                        status="needs_visual_read", reason=f"Image inspection unavailable: {exc}")]
+        recognized = []
     words = native + recognized
     rows = rows_of(words)
     issue = None
