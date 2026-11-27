@@ -7,9 +7,8 @@ import statistics
 from tempfile import NamedTemporaryFile
 from pathlib import Path
 
-import pdfplumber
 from borderless import infer
-from columns import find_three, split_row
+from columns import find_three, narrow_gutter, split_row
 from image_text import read_images
 
 
@@ -145,6 +144,8 @@ def parse_page(page, engine, lang):
     cuts = find_three(prose, page.width)
     if not cuts:
         divider = find_divider(prose, page.width)
+        if divider is None:
+            divider = narrow_gutter(prose, page.width)
         cuts = [divider] if divider is not None else []
     lanes = ("left", "middle", "right") if len(cuts) == 2 else ("left", "right")
     buffers = [[] for _ in lanes]
@@ -197,6 +198,31 @@ def parse_page(page, engine, lang):
     return result
 
 
+def extract_pages(args):
+    try:
+        import pdfplumber
+    except ImportError:
+        from poppler_text import pages
+        for page in pages(args.pdf, args.first_page, args.last_page):
+            page["elements"] = elements_of(page["lines"])
+            yield page
+        return
+    with pdfplumber.open(args.pdf) as doc:
+        last = args.last_page if args.last_page is not None else len(doc.pages)
+        if last > len(doc.pages) or args.first_page > len(doc.pages):
+            raise ValueError("Requested page range exceeds the document")
+        for number in range(args.first_page, last + 1):
+            page = doc.pages[number - 1]
+            try:
+                result = parse_page(page, args.ocr, args.ocr_lang)
+            except Exception as exc:
+                result = dict(page=number, status="page_error", reason=str(exc))
+            finally:
+                if hasattr(page, "close"):
+                    page.close()
+            yield result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pdf", type=Path)
@@ -213,26 +239,15 @@ def main():
     args.json.parent.mkdir(parents=True, exist_ok=True)
     part = None
     try:
-        with pdfplumber.open(args.pdf) as doc:
-            last = args.last_page if args.last_page is not None else len(doc.pages)
-            if last > len(doc.pages) or args.first_page > len(doc.pages):
-                parser.error("Requested page range exceeds the document")
-            with NamedTemporaryFile(mode="w", encoding="utf8", dir=args.json.parent,
-                                    delete=False, suffix=".json.tmp") as stream:
-                part = Path(stream.name)
-                stream.write('{"source":' + json.dumps(args.pdf.name, ensure_ascii=False) + ',"pages":[')
-                for number in range(args.first_page, last + 1):
-                    page = doc.pages[number - 1]
-                    try:
-                        result = parse_page(page, args.ocr, args.ocr_lang)
-                    except Exception as exc:
-                        result = dict(page=number, status="page_error", reason=str(exc))
-                    finally:
-                        page.close()
-                    if number > args.first_page:
-                        stream.write(",")
-                    json.dump(result, stream, ensure_ascii=False)
-                stream.write("]}")
+        with NamedTemporaryFile(mode="w", encoding="utf8", dir=args.json.parent,
+                                delete=False, suffix=".json.tmp") as stream:
+            part = Path(stream.name)
+            stream.write('{"source":' + json.dumps(args.pdf.name, ensure_ascii=False) + ',"pages":[')
+            for index, result in enumerate(extract_pages(args)):
+                if index:
+                    stream.write(",")
+                json.dump(result, stream, ensure_ascii=False)
+            stream.write("]}")
         part.replace(args.json)
     except Exception as exc:
         parser.exit(2, f"Cannot parse {args.pdf.name}: {exc}\\n")

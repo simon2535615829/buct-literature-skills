@@ -2,6 +2,36 @@
 from statistics import median
 
 
+def narrow_gutter(rows, width):
+    # A journal gutter can be narrower than 3% of the page. Look for a
+    # recurrent gap in body lines measured against their own type size.
+    body = [row for row in rows if len(row) >= 6]
+    if len(body) < 6:
+        return None
+    height = median(w["bottom"] - w["top"] for row in body for w in row)
+    if height <= 0:
+        return None
+    best = None
+    for x in range(int(width * .32), int(width * .68)+1):
+        support = []
+        crossed = 0
+        for row in body:
+            if row[0]["x0"] >= x or row[-1]["x1"] <= x:
+                continue
+            if any(w["x0"] <= x < w["x1"] for w in row):
+                crossed += 1
+                continue
+            left = max(w["x1"] for w in row if w["x1"] <= x)
+            right = min(w["x0"] for w in row if w["x0"] > x)
+            if min(x-left, right-x) >= .35*height and right-left >= height:
+                support.append(min(x-left, right-x))
+        if len(support) >= max(4, .4*len(body), 2*crossed):
+            rank = (len(support)-crossed, median(support), -abs(x-width/2))
+            if best is None or rank > best[0]:
+                best = rank, x
+    return best[1] if best else None
+
+
 def find_three(rows, width):
     # Require the same rows to show two distinct wide gaps separated by real text.
     grid = {}
@@ -44,6 +74,11 @@ def split_row(row, cuts, width):
         lane = sum(word["x0"] > cut for cut in cuts)
         groups[lane].append(word)
     for left, right in zip(groups, groups[1:]):
-        if left and right and right[0]["x0"] - left[-1]["x1"] < width * .032:
-            return None
+        if left and right:
+            minimum = width * .032
+            if len(cuts) == 1:
+                height = median(w["bottom"]-w["top"] for w in row)
+                minimum = min(minimum, height)
+            if right[0]["x0"] - left[-1]["x1"] < minimum:
+                return None
     return groups
