@@ -82,3 +82,52 @@ def split_row(row, cuts, width):
             if right[0]["x0"] - left[-1]["x1"] < minimum:
                 return None
     return groups
+
+
+def local_gutters(rows, row_tables, width):
+    """Find supported two-column runs on a page without a stable page-wide gutter."""
+    if not rows:
+        return []
+    height = median(max(w["bottom"] - w["top"] for w in row) for row in rows)
+    bands = []
+    start, bottom = 0, None
+    for i, (row, table) in enumerate(zip(rows, row_tables)):
+        top = min(w["top"] for w in row)
+        if table or (bottom is not None and top - bottom > 2 * height):
+            if i > start:
+                bands.append((start, i))
+            start = i + 1 if table else i
+            bottom = None
+        if not table:
+            edge = max(w["bottom"] for w in row)
+            bottom = edge if bottom is None else max(bottom, edge)
+    if start < len(rows):
+        bands.append((start, len(rows)))
+
+    regions = []
+    for start, end in bands:
+        band = rows[start:end]
+        cut = narrow_gutter(band, width)
+        if cut is None:
+            continue
+        # Repeated sentence fragments on both sides distinguish prose from
+        # a lone pair of labels, a centered heading or a wide caption.
+        paired = []
+        for i, row in enumerate(band):
+            sides = split_row(row, [cut], width)
+            if sides and all(sum(any(c.isalpha() for c in w["text"]) for w in side) >= 2
+                             for side in sides):
+                paired.append(i)
+        if len(paired) < 3:
+            continue
+        first, last = paired[0], paired[-1]
+        # Include single-sided continuation lines at either end of the run.
+        def one_side(row):
+            sides = split_row(row, [cut], width)
+            return sides is not None and sum(bool(side) for side in sides) == 1
+        while first > 0 and one_side(band[first - 1]):
+            first -= 1
+        while last + 1 < len(band) and one_side(band[last + 1]):
+            last += 1
+        regions.append((start + first, start + last + 1, cut))
+    return regions

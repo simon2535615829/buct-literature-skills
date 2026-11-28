@@ -15,6 +15,15 @@ python /skills/weekly-skill/scripts/extract.py /input/paper.pdf /app/work/origin
 
 提取表值时把列标题、行名（可能换行）、数值或空单元格一起核对。无框表依靠同列的反复对齐；列归属含混时查看原页对应位置。保留标题、脚注、图表题注和正文的阅读次序。读取长文档可用 `--first-page` 与 `--last-page` 分段。
 
+先查看页索引，再按题目读取目标页。下例中的 2 是原 PDF 的物理页码。页视图列出带行号的正文、图像状态，以及带行列号、跨度和空值的表格单元格。
+
+```sh
+python /skills/weekly-skill/scripts/read_page.py /app/work/original-layout.json
+python /skills/weekly-skill/scripts/read_page.py /app/work/original-layout.json 2
+```
+
+同页含双栏正文和通栏图注时，提取器先检测整页栏线；整页不成立时再从有垂直间隔或表格边界的局部文字带中寻找反复出现的栏隙。局部栏线记在该页的 `column_regions` 中。引用时保留页码和行号（例如 `p2-l3`）；需要精确位置时回查同一行的 `bbox` 或原始词框。栏隙证据不足、图中文字异常或跨页接续不清时，结合原页核对。
+
 ### 交付原始坐标与附件清单
 
 按案例的 output_contract 交付。案例要求原始坐标附件时，保留整份提取器输出；重建的行列及解释写进正文。若案例只要答案和来源，可直接引用原页和区块。

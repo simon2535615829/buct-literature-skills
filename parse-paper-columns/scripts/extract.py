@@ -8,7 +8,7 @@ from tempfile import NamedTemporaryFile
 from pathlib import Path
 
 from borderless import infer
-from columns import find_three, narrow_gutter, split_row
+from columns import find_three, local_gutters, narrow_gutter, split_row
 from image_text import read_images
 
 
@@ -153,6 +153,9 @@ def parse_page(page, engine, lang):
             divider = narrow_gutter(prose, page.width)
         cuts = [divider] if divider is not None else []
     lanes = ("left", "middle", "right") if len(cuts) == 2 else ("left", "right")
+    column_regions = [] if cuts else local_gutters(rows, row_tables, page.width)
+    local_cuts = {i: [cut] for start, end, cut in column_regions for i in range(start, end)}
+    boundaries = {i for start, end, _ in column_regions for i in (start, end)}
     buffers = [[] for _ in lanes]
     lines = []
 
@@ -174,14 +177,17 @@ def parse_page(page, engine, lang):
             emit(group, lane)
             group.clear()
 
-    for row, table in zip(rows, row_tables):
+    for i, (row, table) in enumerate(zip(rows, row_tables)):
+        if i in boundaries:
+            flush()
+        active = local_cuts.get(i, cuts)
         if table:
             flush()
             emit([row], "table", table)
-        elif not cuts:
+        elif not active:
             emit([row], "single")
         else:
-            groups = split_row(row, cuts, page.width)
+            groups = split_row(row, active, page.width)
             if groups is None:
                 flush()
                 emit([row], "spanning")
@@ -194,6 +200,12 @@ def parse_page(page, engine, lang):
                 divider_x=cuts[0] if len(cuts) == 1 else None, dividers_x=cuts, status="review_layout" if lines else "needs_visual_read",
                 lines=lines)
     result["elements"] = elements_of(lines)
+    if column_regions:
+        result["column_regions"] = [
+            {"top": min(w["top"] for w in rows[start]),
+             "bottom": max(w["bottom"] for row in rows[start:end] for w in row),
+             "dividers_x": [cut]} for start, end, cut in column_regions
+        ]
     result["tables"] = tables
     result["image_regions"] = regions
     if issue:
